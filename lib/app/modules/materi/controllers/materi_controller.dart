@@ -103,7 +103,10 @@ class MateriController extends GetxController {
       showGlosariumModal();
       return;
     }
-
+    if (index == 7) {
+      showPhysicsAroundUsModal();
+      return;
+    }
     if (route != null) {
       Get.toNamed(route);
     }
@@ -856,7 +859,6 @@ class MateriController extends GetxController {
         insetPadding: EdgeInsets.all(10),
         child: Stack(
           children: [
-            
             GestureDetector(
               onTap: () => Get.back(),
               child: Container(
@@ -865,7 +867,6 @@ class MateriController extends GetxController {
                 color: Colors.black54,
               ),
             ),
-            
             Center(
               child: Container(
                 margin: EdgeInsets.all(20),
@@ -876,7 +877,6 @@ class MateriController extends GetxController {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(16),
@@ -905,7 +905,6 @@ class MateriController extends GetxController {
                         ],
                       ),
                     ),
-                    
                     Container(
                       height: Get.height * 0.7,
                       width: double.infinity,
@@ -955,7 +954,6 @@ class MateriController extends GetxController {
                         },
                       ),
                     ),
-                    
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 12),
                       child: Obx(() => Row(
@@ -978,7 +976,6 @@ class MateriController extends GetxController {
                             }).toList(),
                           )),
                     ),
-                    
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(16),
@@ -1015,7 +1012,6 @@ class MateriController extends GetxController {
         insetPadding: EdgeInsets.all(10),
         child: Stack(
           children: [
-            
             GestureDetector(
               onTap: () => Get.back(),
               child: Container(
@@ -1024,7 +1020,6 @@ class MateriController extends GetxController {
                 color: Colors.black54,
               ),
             ),
-            
             Center(
               child: Container(
                 margin: EdgeInsets.all(20),
@@ -1035,7 +1030,6 @@ class MateriController extends GetxController {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(16),
@@ -1064,7 +1058,6 @@ class MateriController extends GetxController {
                         ],
                       ),
                     ),
-                    
                     Container(
                       height: Get.height * 0.7,
                       width: double.infinity,
@@ -1105,7 +1098,6 @@ class MateriController extends GetxController {
                         ),
                       ),
                     ),
-                    
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(16),
@@ -1119,6 +1111,179 @@ class MateriController extends GetxController {
                           SizedBox(width: 8),
                           Text(
                             'Pinch atau scroll untuk zoom in/out',
+                            style: AppText.pSmall(color: AppColors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      barrierDismissible: true,
+    );
+  }
+
+  void showPhysicsAroundUsModal() {
+    final currentImageIndex = 0.obs;
+    final physicsAroundUsImages = [
+      'assets/images/PAU_01.png',
+      'assets/images/PAU_02.png',
+      'assets/images/PAU_03.png',
+      'assets/images/PAU_04.png',
+      'assets/images/PAU_05.png',
+      'assets/images/PAU_06.png',
+      'assets/images/PAU_07.png',
+      'assets/images/PAU_08.png',
+    ];
+
+    Get.dialog(
+      Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: EdgeInsets.all(10),
+        child: Stack(
+          children: [
+            // Background overlay
+            GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.black54,
+              ),
+            ),
+            // Main content
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Header
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Obx(() => Text(
+                                'Physics Around Us - Gambar ${currentImageIndex.value + 1}/${physicsAroundUsImages.length}',
+                                style: AppText.h6(color: Colors.white),
+                              )),
+                          GestureDetector(
+                            onTap: () => Get.back(),
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Image viewer
+                    Container(
+                      height: Get.height * 0.7,
+                      width: double.infinity,
+                      child: PageView.builder(
+                        itemCount: physicsAroundUsImages.length,
+                        onPageChanged: (index) {
+                          currentImageIndex.value = index;
+                        },
+                        itemBuilder: (context, index) {
+                          return InteractiveViewer(
+                            panEnabled: true,
+                            boundaryMargin: EdgeInsets.all(20),
+                            minScale: 0.5,
+                            maxScale: 4.0,
+                            child: Container(
+                              padding: EdgeInsets.all(16),
+                              child: Image.asset(
+                                physicsAroundUsImages[index],
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    color: AppColors.muted,
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.image_not_supported,
+                                            size: 60,
+                                            color: AppColors.grey,
+                                          ),
+                                          SizedBox(height: 16),
+                                          Text(
+                                            'Gambar ${index + 1} tidak ditemukan',
+                                            style: AppText.pSmall(
+                                                color: AppColors.grey),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    // Page indicators
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      child: Obx(() => Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: physicsAroundUsImages
+                                .asMap()
+                                .entries
+                                .map((entry) {
+                              return Container(
+                                width: currentImageIndex.value == entry.key
+                                    ? 12
+                                    : 8,
+                                height: 8,
+                                margin: EdgeInsets.symmetric(horizontal: 4),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: currentImageIndex.value == entry.key
+                                      ? AppColors.primary
+                                      : AppColors.muted,
+                                ),
+                              );
+                            }).toList(),
+                          )),
+                    ),
+                    // Instructions
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.swipe,
+                            size: 16,
+                            color: AppColors.grey,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            'Swipe untuk ganti gambar',
                             style: AppText.pSmall(color: AppColors.grey),
                           ),
                         ],

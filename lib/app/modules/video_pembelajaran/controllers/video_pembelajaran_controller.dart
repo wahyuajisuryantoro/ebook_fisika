@@ -9,9 +9,9 @@ class VideoPembelajaranController extends GetxController {
   final playFromYoutube = true.obs;
   final isControllerReady = false.obs;
   final isFullScreen = false.obs;
-  
+
   YoutubePlayerController? youtubePlayerController;
-  
+
   final List<Map<String, String>> videoPlaylist = [
     {
       'id': '1',
@@ -61,6 +61,18 @@ class VideoPembelajaranController extends GetxController {
       'youtubeUrl': 'https://youtu.be/dubvJyYVRRU?si=tAXvC3JbIBOgfIZR',
       'localPath': 'assets/video/video_8.mp4',
     },
+    {
+      'id': '9',
+      'title': 'Pemahaman Lanjutan - Prinsip Bernoulli',
+      'youtubeUrl': 'https://youtu.be/eKEorBipbO8?si=DJviWC9n4AdGYby3 ',
+      'localPath': 'assets/video/pemahaman_lanjutan.mp4',
+    },
+    {
+      'id': '10',
+      'title': 'Bagaimana Pesawat Bisa Terbang?',
+      'youtubeUrl': 'https://youtu.be/p4VHMsIuPmk?si=aFku0kGKnHIEwvrQ',
+      'localPath': 'assets/video/pesawat.mp4',
+    },
   ];
 
   @override
@@ -80,7 +92,7 @@ class VideoPembelajaranController extends GetxController {
       DeviceOrientation.portraitUp,
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    
+
     _disposeController();
     super.onClose();
   }
@@ -104,13 +116,13 @@ class VideoPembelajaranController extends GetxController {
   }
 
   void _createController(int index) {
-
     _disposeController();
-    
+
     isLoading.value = true;
     isControllerReady.value = false;
-    
-    final videoId = YoutubePlayer.convertUrlToId(videoPlaylist[index]['youtubeUrl']!);
+
+    final videoId =
+        YoutubePlayer.convertUrlToId(videoPlaylist[index]['youtubeUrl']!);
     if (videoId != null) {
       youtubePlayerController = YoutubePlayerController(
         initialVideoId: videoId,
@@ -126,9 +138,9 @@ class VideoPembelajaranController extends GetxController {
           useHybridComposition: true,
         ),
       );
-      
+
       youtubePlayerController!.addListener(_playerStateListener);
-      
+
       Future.delayed(const Duration(milliseconds: 500), () {
         if (youtubePlayerController != null) {
           isControllerReady.value = true;
@@ -191,14 +203,12 @@ class VideoPembelajaranController extends GetxController {
   void toggleFullScreen() {
     isFullScreen.toggle();
     if (isFullScreen.value) {
-
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     } else {
-
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
       ]);

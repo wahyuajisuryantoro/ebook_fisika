@@ -41,16 +41,16 @@ class HomeController extends GetxController {
     },
   ];
 
-  String get greeting {
-    final hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Selamat Pagi';
-    } else if (hour < 17) {
-      return 'Selamat Siang';
-    } else {
-      return 'Selamat Malam';
-    }
+ String get greeting {
+  final hour = DateTime.now().hour;
+  if (hour < 12) {
+    return 'Selamat Pagi\nSelamat Datang di Physics Fun';
+  } else if (hour < 17) {
+    return 'Selamat Siang\nSelamat Datang di Physics Fun';
+  } else {
+    return 'Selamat Malam\nSelamat Datang di Physics Fun';
   }
+}
 
   @override
   void onInit() {

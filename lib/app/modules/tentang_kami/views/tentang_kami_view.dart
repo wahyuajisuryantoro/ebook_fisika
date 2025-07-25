@@ -28,18 +28,10 @@ class TentangKamiView extends GetView<TentangKamiController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header Section
             _buildHeaderSection(context),
-            
-            // App Description Section
             _buildAppDescriptionSection(context),
-            
-            // Team Section
             _buildTeamSection(context),
-            
-            // Contact Information
             _buildContactSection(context),
-            
             const SizedBox(height: 32),
           ],
         ),
@@ -63,7 +55,6 @@ class TentangKamiView extends GetView<TentangKamiController> {
       ),
       child: Column(
         children: [
-          // Team Photos
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -71,9 +62,7 @@ class TentangKamiView extends GetView<TentangKamiController> {
               _buildTeamPhoto('assets/images/team_2.png'),
             ],
           ),
-          
           const SizedBox(height: 24),
-          
           Text(
             'ABOUT US',
             style: AppText.h2(color: Colors.white).copyWith(
@@ -131,9 +120,7 @@ class TentangKamiView extends GetView<TentangKamiController> {
             'Tentang Aplikasi',
             style: AppText.h4(color: AppColors.dark),
           ),
-          
           const SizedBox(height: 16),
-          
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(20),
@@ -164,19 +151,13 @@ class TentangKamiView extends GetView<TentangKamiController> {
             'Tim Pengembang',
             style: AppText.h4(color: AppColors.dark),
           ),
-          
           const SizedBox(height: 20),
-          
-          // Fanny Verawaty Card
           _buildTeamMemberCard(
             context,
             controller.teamMembers[0],
             isMainDeveloper: true,
           ),
-          
           const SizedBox(height: 20),
-          
-          // Dr. Supahar Card
           _buildTeamMemberCard(
             context,
             controller.teamMembers[1],
@@ -187,7 +168,8 @@ class TentangKamiView extends GetView<TentangKamiController> {
     );
   }
 
-  Widget _buildTeamMemberCard(BuildContext context, Map<String, String> member, {required bool isMainDeveloper}) {
+  Widget _buildTeamMemberCard(BuildContext context, Map<String, String> member,
+      {required bool isMainDeveloper}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -208,14 +190,14 @@ class TentangKamiView extends GetView<TentangKamiController> {
       ),
       child: Column(
         children: [
-          // Profile Image
           Container(
             width: 100,
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: isMainDeveloper ? AppColors.primary : AppColors.secondary,
+                color:
+                    isMainDeveloper ? AppColors.primary : AppColors.secondary,
                 width: 3,
               ),
             ),
@@ -236,10 +218,7 @@ class TentangKamiView extends GetView<TentangKamiController> {
               ),
             ),
           ),
-          
           const SizedBox(height: 16),
-          
-          // Name
           Text(
             member['name']!,
             style: AppText.h5(
@@ -247,31 +226,28 @@ class TentangKamiView extends GetView<TentangKamiController> {
             ),
             textAlign: TextAlign.center,
           ),
-          
           const SizedBox(height: 8),
-          
-          // Role
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: isMainDeveloper 
-                  ? AppColors.primary.withOpacity(0.1) 
+              color: isMainDeveloper
+                  ? AppColors.primary.withOpacity(0.1)
                   : AppColors.secondary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               member['role']!,
               style: AppText.small(
-                color: isMainDeveloper ? AppColors.primary : AppColors.secondary,
+                color:
+                    isMainDeveloper ? AppColors.primary : AppColors.secondary,
               ),
             ),
           ),
-          
           const SizedBox(height: 16),
-          
-          // Description
           Text(
-            isMainDeveloper ? controller.appDescription : controller.dosenDescription,
+            isMainDeveloper
+                ? controller.studentProfile
+                : controller.dosenDescription,
             style: AppText.pSmall(color: AppColors.dark),
             textAlign: TextAlign.justify,
           ),
@@ -296,35 +272,25 @@ class TentangKamiView extends GetView<TentangKamiController> {
             'Informasi Kontak',
             style: AppText.h5(color: Colors.white),
           ),
-          
           const SizedBox(height: 16),
-          
-          // Email Contacts
           _buildContactItem(
             icon: Icons.email,
             title: 'Email',
             subtitle: 'fannyverawaty.2018@student.uny.ac.id',
           ),
-          
           const SizedBox(height: 12),
-          
           _buildContactItem(
             icon: Icons.email,
             title: 'Email Dosen',
             subtitle: 'supahar@uny.ac.id',
           ),
-          
           const SizedBox(height: 12),
-          
           _buildContactItem(
             icon: Icons.play_circle,
             title: 'YouTube',
             subtitle: '@fannyverawaty',
           ),
-          
           const SizedBox(height: 20),
-          
-          // University Info
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
